@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Hotels in Cities</title>
+    </head>
+    <body>
+        <div>
+            <h1>Hotels in Cities</h1>
+            <form action="" class="CityForm" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="save btn btn-default">Make selection</button>
+            </form>
+            <h3>Available hotels:</h3>
+            {% for hotel in hotels %}
+                <li>{{ hotel }}</li>
+            {% endfor %}
+        </div>
+    </body>
+</html>
