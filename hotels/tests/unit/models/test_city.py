@@ -1,12 +1,15 @@
-from unittest import TestCase
-from assignment.hotels.models import City
-# some more settings to make the test actually run ;)
+from django.test import TestCase
+from hotels.models import City
 
 
 class CityTest(TestCase):
-    def test_create_city(self):
-        c = City('AMS', 'Amsterdam')
+    def setUp(self):
+        City.objects.create(code="AMS", name="Amsterdam")
 
-        self.assertEqual(c.code, 'AMS')
-        self.assertEqual(c.name, 'Amsterdam')
+    def test_create_city(self):
+        """Created city has the city code and name that belongs to them."""
+        amsterdam = City.objects.get(name="Amsterdam")
+
+        self.assertEqual(amsterdam.code, 'AMS')
+        self.assertEqual(amsterdam.name, 'Amsterdam')
 

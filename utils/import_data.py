@@ -22,21 +22,30 @@ from conf import credentials
 
 def get_city_data():
     """Retrieves the city data through the URL over HTTP"""
-    url_cities = credentials["url_cities"]
-    data = requests.get(url_cities, auth=HTTPBasicAuth(credentials["username"], credentials["password"]))
-    return data
+    data = requests.get(credentials["url_cities"],
+                        auth=HTTPBasicAuth(credentials["username"],
+                                           credentials["password"]))
+
+    if data.ok:
+        return data.text
+    else:
+        return 'Bad Response'
 
 
 def get_hotel_data():
     """Retrieves the hotel data through the URL over HTTP"""
     url_hotels = credentials["url_hotels"]
     data = requests.get(url_hotels, auth=HTTPBasicAuth(credentials["username"], credentials["password"]))
-    return data
+
+    if data.ok:
+        return data.text
+    else:
+        return 'Bad Response'
 
 
 def make_city_dataframe(city_data):
     """Makes a city dataframe from the obtained data through the URL."""
-    dataframe = pd.read_csv(StringIO(city_data.text), header=None, delimiter=";")
+    dataframe = pd.read_csv(StringIO(city_data), header=None, delimiter=";")
     return dataframe
 
 
@@ -47,7 +56,7 @@ def make_hotel_dataframe(hotel_data):
         For now I assumed it's different locations from a hotel chain in one city.
         If not so, duplicates could easily be removed with pandas.
     """
-    dataframe = pd.read_csv(StringIO(hotel_data.text), header=None, delimiter=";")
+    dataframe = pd.read_csv(StringIO(hotel_data), header=None, delimiter=";")
     return dataframe
 
 
@@ -68,6 +77,7 @@ def create_hotel_objects(df_hotels):
     """
         Creates the hotel objects from the dataframe.
     """
+
     hotels_created = [
         Hotel(
             city=City.objects.get(code=row[0]),
