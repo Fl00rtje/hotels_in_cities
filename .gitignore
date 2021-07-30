@@ -9,6 +9,7 @@ conf.py
 
 # ignoring pycache
 __pycache__
+hotels/tests/unit/__pycache__/*
 *.pyc
 
 # ignoring Pycharm files
