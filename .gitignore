@@ -1,3 +1,15 @@
+# ignoring the migrations after I added __init__.py
+migrations/
+
+# ignoring the conf file
 conf.py
+
+# ignoring the database
 *db.sqlite3
-migrations
+
+# ignoring pycache
+#__pycache__
+#*.pyc
+
+# ignoring Pycharm files
+.idea/
