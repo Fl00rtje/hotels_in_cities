@@ -8,8 +8,8 @@ conf.py
 *db.sqlite3
 
 # ignoring pycache
-#__pycache__
-#*.pyc
+__pycache__
+*.pyc
 
 # ignoring Pycharm files
 .idea/
