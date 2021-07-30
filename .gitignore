@@ -13,3 +13,4 @@ __pycache__
 
 # ignoring Pycharm files
 .idea/
+.DS_Store
