@@ -5,6 +5,7 @@ from unittest.mock import patch
 import os
 import pandas as pd
 from hotels.models import City
+from conf import credentials
 
 
 class ImportDataTest(TestCase):
@@ -31,7 +32,6 @@ class ImportDataTest(TestCase):
     def test_get_city_data(self):
         """
             The city URL is called with the credentials in the config file.
-            I think it's better to mock the username and password.
         """
 
         with patch('requests.get') as mocked_get:
@@ -39,15 +39,15 @@ class ImportDataTest(TestCase):
             mocked_get.return_value.text = self.data_cities
 
             data = import_data.get_city_data()
-            mocked_get.assert_called_with("http://rachel.maykinmedia.nl/djangocase/city.csv",
-                                          auth=HTTPBasicAuth("python-demo", "claw30_bumps"))
+            mocked_get.assert_called_with(credentials["url_cities"],
+                                        auth=HTTPBasicAuth(credentials["username"],
+                                                           credentials["password"]))
 
             self.assertEqual(data, self.data_cities)
 
     def test_get_hotel_data(self):
         """
              The hotel URL is called with the credentials in the config file.
-             I think it's better to mock the username and password.
         """
 
         with patch('requests.get') as mocked_get:
@@ -55,8 +55,9 @@ class ImportDataTest(TestCase):
             mocked_get.return_value.text = self.data_hotels
 
             data = import_data.get_hotel_data()
-            mocked_get.assert_called_with("http://rachel.maykinmedia.nl/djangocase/hotel.csv",
-                                          auth=HTTPBasicAuth("python-demo", "claw30_bumps"))
+            mocked_get.assert_called_with(credentials["url_hotels"],
+                                        auth=HTTPBasicAuth(credentials["username"],
+                                                           credentials["password"]))
 
             self.assertEqual(data, self.data_hotels)
 

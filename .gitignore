@@ -11,7 +11,8 @@ conf.py
 __pycache__
 hotels/__pycache__/
 assignment/__pycache__/
-#hotels/tests/unit/__pycache__/*
+hotels/tests/unit/__pycache__/
+hotels/tests/unit/models/__pycache__/
 *.pyc
 
 # ignoring Pycharm files
