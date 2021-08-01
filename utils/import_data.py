@@ -132,10 +132,6 @@ def add_hotels_to_db(hotels):
     Hotel.objects.bulk_create(hotels)
     print(f"Added {len(hotels)} cities to the database")
 
-    # f = open("hotels_log.txt", "a")
-    # f.write(f"{datetime.now()}: Added {len(hotels)} hotels to the database\n")
-    # f.close()
-
 
 def run_cities():
     """
