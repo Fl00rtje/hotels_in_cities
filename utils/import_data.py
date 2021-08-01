@@ -10,7 +10,6 @@ import pandas as pd
 import requests
 from requests.auth import HTTPBasicAuth
 from io import StringIO
-from datetime import datetime
 
 sys.path.append("../")
 os.environ['DJANGO_SETTINGS_MODULE'] = 'assignment.settings'
