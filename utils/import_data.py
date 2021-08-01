@@ -20,7 +20,10 @@ from conf import credentials
 
 
 def get_city_data():
-    """Retrieves the city data through the URL over HTTP"""
+    """
+    Retrieves the city data through the URL over HTTP.
+    TO DO: make a try, except block so that the code doesn't break in case of an error.
+    """
     data = requests.get(credentials["url_cities"],
                         auth=HTTPBasicAuth(credentials["username"],
                                            credentials["password"]))
@@ -32,7 +35,10 @@ def get_city_data():
 
 
 def get_hotel_data():
-    """Retrieves the hotel data through the URL over HTTP"""
+    """
+        Retrieves the hotel data through the URL over HTTP.
+        TO DO: make a try, except block so that the code doesn't break in case of an error.
+    """
     url_hotels = credentials["url_hotels"]
     data = requests.get(url_hotels, auth=HTTPBasicAuth(credentials["username"], credentials["password"]))
 
@@ -43,7 +49,10 @@ def get_hotel_data():
 
 
 def make_city_dataframe(city_data):
-    """Makes a city dataframe from the obtained data through the URL."""
+    """
+        Makes a city dataframe from the obtained data through the URL.
+        TO DO: make a try, except block so that the code doesn't break in case of an error.
+    """
     dataframe = pd.read_csv(StringIO(city_data), header=None, delimiter=";")
     return dataframe
 
@@ -54,13 +63,17 @@ def make_hotel_dataframe(hotel_data):
         There seem to be some duplicates in the hotel data, but it could also be different locations.
         For now I assumed it's different locations from a hotel chain in one city.
         If not so, duplicates could easily be removed with pandas.
+        TO DO: make a try, except block so that the code doesn't break in case of an error.
     """
     dataframe = pd.read_csv(StringIO(hotel_data), header=None, delimiter=";")
     return dataframe
 
 
 def create_city_objects(df_cities):
-    """Creates the city objects from the dataframe"""
+    """
+        Creates the city objects from the dataframe.
+        TO DO: make a try, except block so that the code doesn't break in case of an error.
+    """
     cities_created = [
         City(
             code=row[0],
@@ -75,6 +88,7 @@ def create_city_objects(df_cities):
 def create_hotel_objects(df_hotels):
     """
         Creates the hotel objects from the dataframe.
+        TO DO: make a try, except block so that the code doesn't break in case of an error.
     """
 
     hotels_created = [
@@ -95,6 +109,7 @@ def add_cities_to_db(cities):
         This could be changed / improved by checking by the city code:
         - if the city is not in the dataframe, delete the city from the database
         - if the city is in de db already, update the record (by update_or_create I think)
+        TO DO: make a try, except block so that the code doesn't break in case of an error.
     """
     City.objects.all().delete()
     City.objects.bulk_create(cities)
@@ -111,6 +126,7 @@ def add_hotels_to_db(hotels):
         This could be changed / improved by checking by the hotel code:
         - if the hotel is not in the dataframe, delete the hotel from the database
         - if the hotel is in de db already, update the record (by update_or_create I think)
+        TO DO: make a try, except block so that the code doesn't break in case of an error.
     """
     Hotel.objects.all().delete()
     Hotel.objects.bulk_create(hotels)
